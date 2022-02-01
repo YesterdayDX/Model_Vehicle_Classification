@@ -28,19 +28,19 @@ if __name__ == "__main__":
     model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
     model.summary()
 
-    # Train the model
-    history = model.fit(X_train,
-        Y_train,
-        batch_size=64,
-        epochs=100,
-        verbose=2,
-        validation_data=(X_val,Y_val),
-        callbacks = [
-                    tf.keras.callbacks.ModelCheckpoint(logfile, monitor='val_loss', verbose=1, save_best_only=True, mode='auto'),
-                    tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.8,verbose=1,patince=5,min_lr=0.0000001),
-                    tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, verbose=1, mode='auto'),           
-                    ]
-                        )
+    # # Train the model
+    # history = model.fit(X_train,
+    #     Y_train,
+    #     batch_size=64,
+    #     epochs=100,
+    #     verbose=2,
+    #     validation_data=(X_val,Y_val),
+    #     callbacks = [
+    #                 tf.keras.callbacks.ModelCheckpoint(logfile, monitor='val_loss', verbose=1, save_best_only=True, mode='auto'),
+    #                 tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss',factor=0.8,verbose=1,patince=5,min_lr=0.0000001),
+    #                 tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, verbose=1, mode='auto'),           
+    #                 ]
+    #                     )
 
     # Load the best weights once training is finished
     model.load_weights(logfile)
