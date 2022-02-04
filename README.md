@@ -5,4 +5,4 @@
 ### Environment
 Python 3.7.10
 
-Tensorflow 2.4.0
+Run "pip install -r requirements.txt" to install the required packages.
