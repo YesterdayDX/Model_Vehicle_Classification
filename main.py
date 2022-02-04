@@ -23,10 +23,10 @@ if __name__ == "__main__":
     X_val = [X_val_a, X_val_s]
     X_test = [X_test_a, X_test_s]
 
-    # DeepSense Model
-    model = deepSense()
-    model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
-    model.summary()
+    # # DeepSense Model
+    # model = deepSense()
+    # model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
+    # model.summary()
 
     # # Train the model
     # history = model.fit(X_train,
@@ -43,7 +43,8 @@ if __name__ == "__main__":
     #                     )
 
     # Load the best weights once training is finished
-    model.load_weights(logfile)
+    model = tf.keras.models.load_model(logfile)
+    model.summary()
 
     # Show simple version of performance
     score = model.evaluate(X_test, Y_test, verbose=1, batch_size=64)
