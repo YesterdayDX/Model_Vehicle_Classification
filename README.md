@@ -1,12 +1,12 @@
 ## DeepSense Model for Vehicle Recognition -- Version 1
 ### Replace the "train_data" folder with the one in Dropbox
 Copy the files in Dropbox folder "ShakeData/GQ-2022-01-06-clean/train_data/" to "train_data/" folder in this repo:
-train_X_both.csv
+train_X_both.csv  
 train_Y.csv  
-val_X_both.csv
-val_Y.csv
+val_X_both.csv  
+val_Y.csv 
 test_X_both.csv  
-test_Y.csv             
+test_Y.csv            
 
 ### Environment
 Python 3.7.10
