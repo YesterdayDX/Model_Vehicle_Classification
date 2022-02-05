@@ -20,6 +20,6 @@ We save the model we trained in **'./log/weight_deepSense.h5'**, to load the mod
 
 If you want to train the model by youself, you can run
 
-**"python train.py -m *model_path*"**
+**"python train.py -m *‘model_path’*"**
 
-*model_path* is the file to store the trained model with a default value './log/weight_default.h5'
+*‘model_path’* is the file to store the trained model with a default value './log/weight_default.h5'
