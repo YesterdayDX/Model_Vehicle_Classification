@@ -16,7 +16,7 @@ Run **"pip install -r requirements.txt"** to install the required packages.
 ### Run the code
 We save the model we trained in **'./log/weight_deepSense.h5'**, to load the model from './log/weight_deepSense.h5' and evaluate its performance, just run
 
-**"python eval.py -m log/weight_deepSense.h5"**
+**"python eval.py -m ./log/weight_deepSense.h5"**
 
 If you want to train the model by youself, you can run
 
