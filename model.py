@@ -5,8 +5,8 @@ from tensorflow.keras.layers import Input,Dense,Conv1D,Conv2D,Dropout,concatenat
 
 
 def deepSense(weights=None,
-             input_shape1=[200,1],
-             input_shape2=[200,1],
+             input_shape1=[100,1],
+             input_shape2=[100,1],
              classes=3):
 
     dr=0.3
@@ -26,7 +26,7 @@ def deepSense(weights=None,
     x = Conv1D(128, 8, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(l=r))(x)
     x = tf.keras.layers.GlobalMaxPool1D(data_format='channels_last', name='global_max_pooling1d')(x)
 
-    x=Dense(128,activation="selu",name="FC1")(x)
+    x=Dense(128,activation="relu",name="FC1")(x)
     x=Dropout(dr)(x)
     x=Dense(classes,activation="softmax",name="Softmax")(x)
 

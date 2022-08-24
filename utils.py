@@ -5,18 +5,19 @@ import matplotlib.pyplot as plt
 
 random.seed(2009)
 
-def load_dataset(train_rate=1.0, dataset='split_run'):
-    df = pd.read_csv('./train_data/train_X_both.csv', header=None)
-    X_train = df.values.reshape(df.shape[0],2,200).astype('float64')
-    df = pd.read_csv('./train_data/val_X_both.csv', header=None)
-    X_val = df.values.reshape(df.shape[0],2,200).astype('float64')
-    df = pd.read_csv('./train_data/test_X_both.csv', header=None)
-    X_test = df.values.reshape(df.shape[0],2,200).astype('float64')
-    df = pd.read_csv('./train_data/train_Y.csv', header=None)
+def load_dataset(L=100):
+    folder_name = './train_data_'+str(int(L/100))+'sec/'
+    df = pd.read_csv(folder_name+'train_X_both.csv', header=None)
+    X_train = df.values.reshape(df.shape[0],2,L).astype('float64')
+    df = pd.read_csv(folder_name+'val_X_both.csv', header=None)
+    X_val = df.values.reshape(df.shape[0],2,L).astype('float64')
+    df = pd.read_csv(folder_name+'test_X_both.csv', header=None)
+    X_test = df.values.reshape(df.shape[0],2,L).astype('float64')
+    df = pd.read_csv(folder_name+'train_Y.csv', header=None)
     Y_train = df.values
-    df = pd.read_csv('./train_data/val_Y.csv', header=None)
+    df = pd.read_csv(folder_name+'val_Y.csv', header=None)
     Y_val = df.values
-    df = pd.read_csv('./train_data/test_Y.csv', header=None)
+    df = pd.read_csv(folder_name+'test_Y.csv', header=None)
     Y_test = df.values
 
     X_train=np.swapaxes(X_train,1,2)

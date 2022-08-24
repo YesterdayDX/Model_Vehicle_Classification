@@ -13,14 +13,17 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-l", "--length", help="length of data", \
+        type=int, default=100)
     parser.add_argument("-m", "--model", help="weights of the trained neural network model", \
-        type=str, default="./log/weight_default.h5")
+        type=str, default="./log/weight_default_1sec.h5")
     args = parser.parse_args()
 
     logfile = args.model
+    L = args.length
 
     # Load Dataset
-    X_train_a, X_train_s, X_val_a, X_val_s, X_test_a, X_test_s, Y_train, Y_val, Y_test = load_dataset()
+    X_train_a, X_train_s, X_val_a, X_val_s, X_test_a, X_test_s, Y_train, Y_val, Y_test = load_dataset(L)
 
     print(X_train_a.shape, X_train_s.shape, Y_train.shape)
     print(X_val_a.shape, X_val_s.shape, Y_val.shape)
@@ -32,7 +35,7 @@ if __name__ == "__main__":
     X_test = [X_test_a, X_test_s]
 
     # DeepSense Model
-    model = deepSense()
+    model = deepSense(input_shape1=[L,1], input_shape2=[L,1])
     model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
     model.summary()
     print(logfile)

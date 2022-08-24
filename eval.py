@@ -12,8 +12,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-l", "--length", help="length of data", \
+        type=int, default=100)
     parser.add_argument("-m", "--model", help="weights of the trained neural network model", \
-        type=str, default="./log/weight_default.h5")
+        type=str, default="./log/weight_default_1sec.h5")
     args = parser.parse_args()
 
     logfile = args.model
