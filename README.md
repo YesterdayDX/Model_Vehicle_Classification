@@ -1,4 +1,13 @@
 ## DeepSense Model for Vehicle Recognition -- Version 1
+### Update 2022-08-24
+`generate_train_data.py`: from raw data to training, validation, and testing data in 'train_data_1sec' (window=1s)
+
+`train.py`: Training to detector, model stored in './log/weight_default_1sec.h5'
+
+`transfer_to_lite.py`: load './log/weight_default_1sec.h5', then convert to lite model in './liteModel/deepsense.tflite'.
+
+
+
 ### Replace the "train_data" folder with the one in Dropbox
 Copy the files in Dropbox folder "ShakeData/GQ-2022-01-06-clean/train_data/" to "train_data/" folder in this repo:  
 train_X_both.csv  
