@@ -4,12 +4,20 @@ import numpy as np
 import tensorflow as tf
 import argparse
 import time
+from scipy import signal
 
-from model import deepSense
+from model import deepSense, deepSense_spec
 from utils import load_dataset
 
 os.environ["KERAS_BACKEND"] = "tensorflow"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
+def get_spec(X):
+    f, t, sgram = signal.stft(X, nperseg=64, noverlap=63, boundary=None)
+    sgram = np.abs(sgram)
+    X_out = sgram[..., np.newaxis]
+    X_out = np.swapaxes(X_out, 1,2)
+    return X_out
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -29,13 +37,21 @@ if __name__ == "__main__":
     print(X_val_a.shape, X_val_s.shape, Y_val.shape)
     print(X_test_a.shape, X_test_s.shape, Y_test.shape)
 
+    X_train_a = get_spec(X_train_a)
+    X_train_s = get_spec(X_train_s)
+    X_val_a = get_spec(X_val_a)
+    X_val_s = get_spec(X_val_s)
+    X_test_a = get_spec(X_test_a)
+    X_test_s = get_spec(X_test_s)
+    print(X_train_a.shape)
+
     # Train the model with both acoustic and seismic data
     X_train = [X_train_a, X_train_s]
     X_val = [X_val_a, X_val_s]
     X_test = [X_test_a, X_test_s]
 
     # DeepSense Model
-    model = deepSense(input_shape1=[L,1], input_shape2=[L,1])
+    model = deepSense_spec()
     model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
     model.summary()
     print(logfile)

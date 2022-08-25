@@ -41,12 +41,24 @@ def test_lite_model(L, logfile_lite):
     for i in range(N):
         x_a = X_test_a[i]
         x_s = X_test_s[i]
-        x_a = x_a[np.newaxis,...,np.newaxis]
-        x_s = x_s[np.newaxis,...,np.newaxis]
+
+        x_a = x_a[np.newaxis,...]
+        x_s = x_s[np.newaxis,...]
+
+        f, t, x_a = signal.stft(x_a, nperseg=64, noverlap=63, boundary=None)
+        x_a = np.abs(x_a)                
+        f, t, x_s = signal.stft(x_s, nperseg=64, noverlap=63, boundary=None)
+        x_s = np.abs(x_s)
+
+        x_a = np.swapaxes(x_a, 1,2)
+        x_s = np.swapaxes(x_s, 1,2)
+
+        x_a = x_a[..., np.newaxis]
+        x_s = x_s[..., np.newaxis]
 
         x_a = np.float32(x_a)
         x_s = np.float32(x_s)
-        # print(x_a.shape)
+        print(x_a.shape)
 
         interpreter.set_tensor(input_details[0]['index'], x_a)
         interpreter.set_tensor(input_details[1]['index'], x_s)
